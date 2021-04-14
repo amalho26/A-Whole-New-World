@@ -7,8 +7,22 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+   
+    public int keyprogress;
+    public Text countText; //public variable UI text for keeping track of score
+
+
+    public GameObject Chest;
+    public GameObject keyText;
+    public GameObject Shield;
+  
+
+    public int maxHealth = 50;
     public int currentHealth;
-    public Text playerHealth;
+    public HealthBarScript healthBar;
+    
+
+ 
 
     public Animator animator;
     public int isWalkingHash;
@@ -16,34 +30,36 @@ public class PlayerController : MonoBehaviour
     public int isJumpingHash;
     public int isRunningHash;
     public int isSwingingHash;
-    //public int isSwingingHash2;
     public int isFightingHash;
-    //public int isFightingHash2;
 
-    public int damage = 1;
+
+    public int damage = 3;
 
     public bool fight = false;
     public bool swing = false;
-
+    public bool protect = false;
 
     public float speed = 10f;
 
 
 
-    //Start is called before the first frame update
-    public virtual void Start()
-    {
 
-        currentHealth = 50; //set initial player health at 50
+
+    //Start is called before the first frame update
+    public void Start()
+    {
+        keyprogress = 0;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+
+
         animator = GetComponent<Animator>();
         isWalkingHash = Animator.StringToHash("isWalking");
         isBackwardHash = Animator.StringToHash("isBackward");
         isJumpingHash = Animator.StringToHash("isJumping");
         isRunningHash = Animator.StringToHash("isRunning");
         isSwingingHash = Animator.StringToHash("isSwinging");
-        //isSwingingHash2 = Animator.StringToHash("isSwinging2");
         isFightingHash = Animator.StringToHash("isFighting");
-        //isFightingHash2 = Animator.StringToHash("isFighting2");
 
     }
 
@@ -58,18 +74,32 @@ public class PlayerController : MonoBehaviour
         bool jumpingPressed = Input.GetKey(KeyCode.Z);
         bool isRunning = animator.GetBool("isRunning");
         bool runningPressed = Input.GetKey(KeyCode.X);
-        bool isSwinging = animator.GetBool("isSwinging");
-        bool swingingPressed = Input.GetKey(KeyCode.Space);    
-        bool isFighting = animator.GetBool("isFighting");
-        bool fightingPressed = Input.GetKey(KeyCode.B);
-        // bool isSwinging2 = animator.GetBool("isSwinging2");
-        // bool swingingPressed2 = Input.GetKey(KeyCode.Space);    
-        // bool isFighting2 = animator.GetBool("isFighting2");
-        // bool fightingPressed2 = Input.GetKey(KeyCode.B);
 
-        SetHealthText();
+        healthBar.SetHealth(currentHealth);
 
+        if(keyprogress == 10){
 
+            Instantiate(Chest, new Vector3(25,0,20), Quaternion.identity);
+            keyText.SetActive(true);
+            keyprogress = 0; 
+        }
+
+        if(Input.GetKey(KeyCode.O)){
+            if(Input.GetKey(KeyCode.P)){
+                if(Input.GetKey(KeyCode.E)){
+                    if(Input.GetKey(KeyCode.N)){
+                        SceneManager.LoadScene("dungeon");
+                    }
+                }
+            }
+
+        }
+
+        SetCountText();//update score
+
+        Fight();
+        Swing();
+        
         transform.position += transform.forward * speed * Time.deltaTime;
  
         if (Input.GetKeyDown(KeyCode.LeftArrow)) 
@@ -121,29 +151,7 @@ public class PlayerController : MonoBehaviour
         if(!runningPressed)
         {
             animator.SetBool(isRunningHash, false);
-        }
-        //if player pressed Space key 
-        if(swingingPressed)
-        {
-            animator.SetBool(isSwingingHash, true);
-            swing = true;
-        }
-        if(!swingingPressed)
-        {
-            animator.SetBool(isSwingingHash, false);
-            swing = false;
-        }
-         //if player pressed B key 
-        if(fightingPressed)
-        {
-            animator.SetBool(isFightingHash, true);
-            fight = true;
-        }
-        if(!fightingPressed)
-        {
-            animator.SetBool(isFightingHash, false);
-            fight = false;
-        }
+        }        
 
     }
 
@@ -153,10 +161,21 @@ public class PlayerController : MonoBehaviour
     public virtual void Swing()
     {
     }
+    
 
-    public void SetHealthText()
+    public void OnTriggerEnter(Collider coll)
     {
-        playerHealth.text = "Player health: " + currentHealth.ToString();
+         if(coll.gameObject.CompareTag("shield"))
+        {
+            protect = true;
+            Destroy(coll.gameObject);
+        }
+    }
+
+    //Method to update score
+    public void SetCountText()
+    {
+        countText.text = "Points: " + keyprogress.ToString(); //display/update the score 
     }
 
 

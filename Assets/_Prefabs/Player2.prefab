@@ -1629,7 +1629,7 @@ GameObject:
   - component: {fileID: 6500702766296447536}
   - component: {fileID: 6500702766296447549}
   - component: {fileID: 4558761340618138367}
-  - component: {fileID: 4668210602369075257}
+  - component: {fileID: 753051328727346257}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -1727,7 +1727,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4668210602369075257
+--- !u!114 &753051328727346257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1736,12 +1736,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6500702766296447538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d5b8e3e8e734f289ba2902257395f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 34639eb0304c84a428f2c2e6e21df86a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  playerHealth: {fileID: 9092071829933228087, guid: 2c8057c04680f49b7a3497673359e9aa,
+  keyprogress: 0
+  countText: {fileID: 1075251125144050539, guid: 0b510e03e0b4b401996b3e797037db53,
     type: 3}
+  Chest: {fileID: 143391978967777790, guid: 9a51e6c5ce39b40f490ceead60e5cb62, type: 3}
+  keyText: {fileID: 1430811977185742885, guid: 468b0175d0aa246c4acb64909577fced, type: 3}
+  Shield: {fileID: 3133676824925440865, guid: bfd4649d8cf2047aa89e05fa58500c04, type: 3}
+  maxHealth: 50
+  currentHealth: 0
   animator: {fileID: 6500702766296447549}
   isWalkingHash: 0
   isBackwardHash: 0
@@ -1752,7 +1757,10 @@ MonoBehaviour:
   damage: 1
   fight: 0
   swing: 0
+  protect: 0
   speed: 10
+  healthBar2: {fileID: 6618835473688528827, guid: d38dd25e37f794b06a808f3c01f9beaf,
+    type: 3}
 --- !u!1 &6500702766335560284
 GameObject:
   m_ObjectHideFlags: 0

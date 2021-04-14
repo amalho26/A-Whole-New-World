@@ -9,7 +9,6 @@ public class GoblinEnemy : Enemy
 {
     public int enemyHealth;
     public Transform Player;
-    //public Transform Player2;
 
     float moveSpeed = 0.5f;
     float range = 30f;
@@ -18,41 +17,34 @@ public class GoblinEnemy : Enemy
 
     public float enemyCooldown = 1;
     public int damage = 1;
+    public float protectTime = 10f;
 
     public Transform myTransform;
     
     //declare private variables
-    private Rigidbody rigidBody;
-    //for player 1:
     private bool playerInRange = false;
     private bool canAttack = true;
 
-    //for player 2:
-    // private bool playerInRange2 = false;
-    // private bool canAttack2 = true;
-    
 
     void Awake()
     {
 
         Player = GameObject.FindWithTag("Player").transform;//target player1
-        //Player2 = GameObject.FindWithTag("Player2").transform; //target player2
         myTransform = transform; //cache transform data for easy access
     }
 
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
-        enemyHealth = 1;
+        enemyHealth = 10;
+
     }
 
 
 
     void Update()
     {
-
+        
         float distance = Vector3.Distance(myTransform.position, Player.position);
-        //float distance2 = Vector3.Distance(myTransform.position, Player2.position);
 
         if(distance<=range)
         {
@@ -65,75 +57,46 @@ public class GoblinEnemy : Enemy
                 myTransform.position+= myTransform.forward * moveSpeed * Time.deltaTime;
             }
         }
-        // if(distance2<=range)
-        // {
-        //     //look
-        //     myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(Player2.position-myTransform.position), rotationSpeed*Time.deltaTime);
-
-        //     //move
-        //     if(distance2>stop)
-        //     {
-        //         myTransform.position+= myTransform.forward * moveSpeed * Time.deltaTime;
-        //     }
-        // }
-        
-        if (playerInRange && canAttack)
+    if(GameObject.Find("Player").GetComponent<PlayerController1>().protect == true){
+        StartCoroutine(MyCoroutine());
+    }
+  
+        else if (playerInRange && canAttack)
         {
-             GameObject.Find("Player").GetComponent<PlayerController>().currentHealth -= damage;
-             StartCoroutine(AttackCooldown());
-             if(GameObject.Find("Player").GetComponent<PlayerController>().currentHealth == 0)
-             {
-                 Invoke("Restart", 2); //restart the scene
-             }
+            if(GameObject.Find("Player").GetComponent<PlayerController1>().protect == false){
+                GameObject.Find("Player").GetComponent<PlayerController1>().currentHealth -= damage;
+                StartCoroutine(AttackCooldown());
+                if(GameObject.Find("Player").GetComponent<PlayerController1>().currentHealth == 0)
+                {
+                 Invoke("Restart", 2); //restart the scene when the player's health is zero
+                }
+            }
         }
-        // if (playerInRange2 && canAttack2)
-        // {
-        //      GameObject.Find("Player2").GetComponent<PlayerController2>().currentHealth -= damage;
-        //      StartCoroutine(AttackCooldown());
-        //      if(GameObject.Find("Player2").GetComponent<PlayerController2>().currentHealth == 0)
-        //      {
-        //          Invoke("Restart", 2); //restart the scene
-        //      }
-        // }
+
     }
 
     void OnTriggerEnter(Collider coll)
     {
-        //GameObject collideGO = coll.gameObject;
          if(coll.gameObject.CompareTag("Player"))
           {
              playerInRange = true;
          
-            if(GameObject.Find("Player").GetComponent<PlayerController>().fight == true)
+            if(GameObject.Find("Player").GetComponent<PlayerController1>().fight == true)
             {
             if(enemyHealth > 0)
             {
                 enemyHealth -= damage;
+                
             }
             if(enemyHealth <= 0)
             {
-                Destroy(gameObject);
+                Destroy(gameObject); 
             }
             }
           }
-        //  if (collideGO.CompareTag("Player2"))
-        //   {
-        //     playerInRange2 = true;
-         
-        //     if (GameObject.Find("Player2").GetComponent<PlayerController2>().fight2 == true)
-        //     {
-        //     if(enemyHealth > 0)
-        //     {
-        //         enemyHealth -= damage;
-        //     }
-        //     if(enemyHealth <= 0)
-        //     {
-        //         Destroy(gameObject);
-        //     }
-        //     }
-        //}
+
         
-        if(coll.gameObject.CompareTag("Sword") && (GameObject.Find("Player").GetComponent<PlayerController>().swing == true))
+        if(coll.gameObject.CompareTag("Sword") && (GameObject.Find("Player").GetComponent<PlayerController1>().swing == true))
             {
             if(enemyHealth > 0)
             {
@@ -142,25 +105,14 @@ public class GoblinEnemy : Enemy
             if(enemyHealth <= 0)
             {
                 Destroy(gameObject);
+                GameObject.Find("Player").GetComponent<PlayerController1>().keyprogress += 1 ;
             }
             }
-
-        // if(collideGO.CompareTag("Sword") && (GameObject.Find("Player2").GetComponent<PlayerController2>().swing2 == true))
-        //     {
-        //     if(enemyHealth > 0)
-        //     {
-        //         enemyHealth -= damage;
-        //     }
-        //     if(enemyHealth <= 0)
-        //     {
-        //         Destroy(gameObject);
-        //     }
-        //     }
     }
 
     void OnTriggerExit(Collider coll)
     {
-        if (coll.gameObject.CompareTag("Player"));
+        if (coll.gameObject.CompareTag("Player"))
         {
             playerInRange = false;
         }
@@ -172,6 +124,13 @@ public class GoblinEnemy : Enemy
         yield return new WaitForSeconds(enemyCooldown);
         canAttack = true;
      }
+    IEnumerator MyCoroutine()
+    {
+        GameObject.Find("Player").GetComponent<PlayerController1>().protect = true; 
+        yield return new WaitForSeconds(10f); //wait 10 seconds
+        GameObject.Find("Player").GetComponent<PlayerController1>().protect = false;
+    }
+   
 
     public void Restart()
     {

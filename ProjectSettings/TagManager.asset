@@ -7,6 +7,9 @@ TagManager:
   - Sword
   - Enemy
   - Player2
+  - test1
+  - king
+  - shield
   layers:
   - Default
   - TransparentFX

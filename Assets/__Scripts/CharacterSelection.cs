@@ -5,14 +5,18 @@ public class CharacterSelection : MonoBehaviour
 {
 	//create an array to store character game objects
 	public GameObject[] characters;
+	
+	
 	//set selectedCggaracter to 0
 	public int selectedCharacter = 0;
+	public int selectedEnemy = 0;
 
 	//sets selected charcter to false, finds next character in array and sets it equal to true
 	public void NextCharacter()
 	{
 		characters[selectedCharacter].SetActive(false);
 		selectedCharacter = (selectedCharacter + 1) % characters.Length;
+		selectedEnemy = (selectedEnemy + 1) % characters.Length;
 		characters[selectedCharacter].SetActive(true);
 	}
 
@@ -21,9 +25,11 @@ public class CharacterSelection : MonoBehaviour
 	{
 		characters[selectedCharacter].SetActive(false);
 		selectedCharacter--;
+		selectedEnemy--;
 		if (selectedCharacter < 0)
 		{
 			selectedCharacter += characters.Length;
+			selectedEnemy += characters.Length;
 		}
 		characters[selectedCharacter].SetActive(true);
 	}
@@ -32,6 +38,9 @@ public class CharacterSelection : MonoBehaviour
 	public void StartGame()
 	{
 		PlayerPrefs.SetInt("selectedCharacter", selectedCharacter);
+		PlayerPrefs.SetInt("selectedEnemy", selectedEnemy);
 		SceneManager.LoadScene("openingScene");
+
+
 	}
 }

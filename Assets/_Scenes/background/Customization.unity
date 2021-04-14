@@ -998,6 +998,24 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2827138184279347977, guid: b9d0a113e840f43b7a3c502151dc9bbb,
+        type: 3}
+      propertyPath: KeyText
+      value: 
+      objectReference: {fileID: 1430811977185742885, guid: 468b0175d0aa246c4acb64909577fced,
+        type: 3}
+    - target: {fileID: 2827138184279347977, guid: b9d0a113e840f43b7a3c502151dc9bbb,
+        type: 3}
+      propertyPath: countText
+      value: 
+      objectReference: {fileID: 1075251125144050539, guid: 0b510e03e0b4b401996b3e797037db53,
+        type: 3}
+    - target: {fileID: 2827138184279347977, guid: b9d0a113e840f43b7a3c502151dc9bbb,
+        type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 3012422552844185967, guid: 08a6966e5bd5e4672b8e698a08f18379,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9d0a113e840f43b7a3c502151dc9bbb, type: 3}
 --- !u!1 &1251579522
@@ -1063,6 +1081,7 @@ MonoBehaviour:
   - {fileID: 1850071327}
   - {fileID: 392515230}
   selectedCharacter: 0
+  selectedEnemy: 0
 --- !u!4 &1280062276
 Transform:
   m_ObjectHideFlags: 0
@@ -1702,6 +1721,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1280062276}
     m_Modifications:
+    - target: {fileID: 753051328727346257, guid: 31b5a93bdfd7f43958d737aa9e8abff5,
+        type: 3}
+      propertyPath: Chest
+      value: 
+      objectReference: {fileID: 143391978967777790, guid: 9a51e6c5ce39b40f490ceead60e5cb62,
+        type: 3}
+    - target: {fileID: 753051328727346257, guid: 31b5a93bdfd7f43958d737aa9e8abff5,
+        type: 3}
+      propertyPath: Shield
+      value: 
+      objectReference: {fileID: 3133676824925440865, guid: bfd4649d8cf2047aa89e05fa58500c04,
+        type: 3}
+    - target: {fileID: 753051328727346257, guid: 31b5a93bdfd7f43958d737aa9e8abff5,
+        type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 7542773016338354721, guid: 95751913f8c47497f97dc65e81fb7945,
+        type: 3}
+    - target: {fileID: 753051328727346257, guid: 31b5a93bdfd7f43958d737aa9e8abff5,
+        type: 3}
+      propertyPath: KeyText
+      value: 
+      objectReference: {fileID: 1430811977185742885, guid: 468b0175d0aa246c4acb64909577fced,
+        type: 3}
+    - target: {fileID: 753051328727346257, guid: 31b5a93bdfd7f43958d737aa9e8abff5,
+        type: 3}
+      propertyPath: countText
+      value: 
+      objectReference: {fileID: 1075251125144050539, guid: 0b510e03e0b4b401996b3e797037db53,
+        type: 3}
+    - target: {fileID: 753051328727346257, guid: 31b5a93bdfd7f43958d737aa9e8abff5,
+        type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 3012422552844185967, guid: 08a6966e5bd5e4672b8e698a08f18379,
+        type: 3}
     - target: {fileID: 6500702766296447537, guid: 31b5a93bdfd7f43958d737aa9e8abff5,
         type: 3}
       propertyPath: m_RootOrder

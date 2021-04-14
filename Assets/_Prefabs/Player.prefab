@@ -1458,9 +1458,10 @@ GameObject:
   - component: {fileID: 1577573013989886384}
   - component: {fileID: 1577573013989886382}
   - component: {fileID: 1577573013989886383}
+  - component: {fileID: 903103923829373075}
   m_Layer: 0
   m_Name: Longsword
-  m_TagString: Untagged
+  m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1526,6 +1527,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &903103923829373075
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577573013989886385}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 1.2
+  m_Direction: 2
+  m_Center: {x: 0.0000002190173, y: -0.000001915837, z: 0.3255021}
 --- !u!1 &1577573013998944553
 GameObject:
   m_ObjectHideFlags: 0
@@ -2628,8 +2643,8 @@ GameObject:
   - component: {fileID: 1577573014987451575}
   - component: {fileID: 1577573014987451576}
   - component: {fileID: 1577573014987451573}
-  - component: {fileID: 1577573014987451574}
   - component: {fileID: 8111107981325497463}
+  - component: {fileID: 2827138184279347977}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2713,32 +2728,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1577573014987451574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577573014987451578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d5b8e3e8e734f289ba2902257395f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  playerHealth: {fileID: 9092071829933228087, guid: 2c8057c04680f49b7a3497673359e9aa,
-    type: 3}
-  animator: {fileID: 1577573014987451573}
-  isWalkingHash: 0
-  isBackwardHash: 0
-  isJumpingHash: 0
-  isRunningHash: 0
-  isSwingingHash: 0
-  isFightingHash: 0
-  damage: 1
-  fight: 0
-  swing: 0
-  speed: 10
 --- !u!136 &8111107981325497463
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2749,10 +2738,44 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2827138184279347977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577573014987451578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea3de5207bcb4246b516ba2d2c80d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyprogress: 0
+  countText: {fileID: 1075251125144050539, guid: 0b510e03e0b4b401996b3e797037db53,
+    type: 3}
+  Chest: {fileID: 143391978967777790, guid: 9a51e6c5ce39b40f490ceead60e5cb62, type: 3}
+  keyText: {fileID: 1430811977185742885, guid: 468b0175d0aa246c4acb64909577fced, type: 3}
+  Shield: {fileID: 3133676824925440865, guid: bfd4649d8cf2047aa89e05fa58500c04, type: 3}
+  maxHealth: 50
+  currentHealth: 0
+  animator: {fileID: 1577573014987451573}
+  isWalkingHash: 0
+  isBackwardHash: 0
+  isJumpingHash: 0
+  isRunningHash: 0
+  isSwingingHash: 0
+  isFightingHash: 0
+  damage: 1
+  fight: 0
+  swing: 0
+  protect: 0
+  speed: 10
+  healthBar: {fileID: 3012422552844185967, guid: 08a6966e5bd5e4672b8e698a08f18379,
+    type: 3}
 --- !u!1 &1577573015028047980
 GameObject:
   m_ObjectHideFlags: 0
